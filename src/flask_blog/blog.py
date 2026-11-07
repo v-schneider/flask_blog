@@ -94,6 +94,7 @@ def update(id):
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
+    get_post(id)  # check author
     db = get_db()
     db.execute(
         'DELETE FROM post WHERE id = ?', (id,)

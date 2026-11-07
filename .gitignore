@@ -7,6 +7,8 @@ wheels/
 *.egg-info
 
 instance/
+
+# Coverage
 .coverage
 
 # Virtual environments
