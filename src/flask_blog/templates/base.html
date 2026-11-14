@@ -1,31 +1,42 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - my blog</title>
-{% block styles %}
-    {% from 'bootstrap5/utils.html' import render_static %}
-    {{ bootstrap.load_css() }}
-    {{ render_static('css', 'style.css') }}
-{% endblock %}
-<nav>
-    <h1>my blog</h1>
-    <ul>
-        {% if g.user %}
-            <li><span>{{ g.user['username'] }}</span></li>
-            <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
-        {% else %}
-            <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-            <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
-        {% endif %}
-    </ul>
-</nav>
-<section class="content">
-    <header>
-        {% block header %}{% endblock %}
-    </header>
-    {% for message in get_flashed_messages() %}
-        <div class="flash">{{ message }}</div>
-    {% endfor %}
-    {% block content %}{% endblock %}
-</section>
-{% block scripts %}
-    {{ bootstrap.load_js() }}
-{% endblock %}
+<html lang="en">
+    <head>
+        {% block head %}
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+            {% block styles %}
+                {% from 'bootstrap5/utils.html' import render_static %}
+                {{ bootstrap.load_css() }}
+                {{ render_static('css', 'style.css') }}
+            {% endblock %}
+            <title class="text-primary">{% block title %}{% endblock %} - my blog</title>
+        {% endblock %}
+    </head>
+    <body>
+        <nav>
+            <h1>my blog</h1>
+            <ul>
+                {% if g.user %}
+                    <li><span>{{ g.user['username'] }}</span></li>
+                    <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+                    <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <section class="content">
+            <header>
+                {% block header %}{% endblock %}
+            </header>
+            {% for message in get_flashed_messages() %}
+                <div class="flash">{{ message }}</div>
+            {% endfor %}
+            {% block content %}{% endblock %}
+        </section>
+        {% block scripts %}
+            {{ bootstrap.load_js() }}
+        {% endblock %} 
+    </body>
+</html>
