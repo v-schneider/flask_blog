@@ -8,23 +8,25 @@
             {% block styles %}
                 {% from 'bootstrap5/utils.html' import render_static %}
                 {{ bootstrap.load_css() }}
-                {{ render_static('css', 'style.css') }}
+                <!-- {{ render_static('css', 'style.css') }} -->
             {% endblock %}
+
             <title class="text-primary">{% block title %}{% endblock %} - my blog</title>
         {% endblock %}
     </head>
     <body>
-        <nav>
-            <h1>my blog</h1>
-            <ul>
-                {% if g.user %}
-                    <li><span>{{ g.user['username'] }}</span></li>
-                    <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
-                {% else %}
-                    <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-                    <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
-                {% endif %}
-            </ul>
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand h1 mb-0" href="{{ url_for('index') }}">my blog</a>
+                <div class="nav">
+                    {% if g.user %}
+                        <span>{{ g.user['username'] }}</span>
+                        <a href="{{ url_for('auth.logout') }}">Log Out</a>
+                    {% else %}
+                        <a class="nav-link link-dark" href="{{ url_for('auth.register') }}">Register</a>
+                        <a class="nav-link link-dark" href="{{ url_for('auth.login') }}">Log In</a>
+                    {% endif %}
+            </div>
         </nav>
         <section class="content">
             <header>
