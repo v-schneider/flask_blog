@@ -1,15 +1,36 @@
 {% extends 'base.html' %}
 
-{% block header %}
-    <h1>{% block title %}Register{% endblock %}</h1>
-{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block content %}
-    <form method="post">
-        <label for="username">Username</label>
-        <input name="username" id="username" required>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required>
-        <input type="submit" value="Register">
+    <form method="post" class="my-4">
+        {{ form.hidden_tag() }}
+        <fieldset class="border rounded p-4 bg-white">
+            <legend class="border-bottom mb-4">Register</legend>
+            <div class="mb-3">
+                {{ form.username.label(class="form-label") }}
+                {{ form.username(class="form-control form-control-lg") }}
+            </div>
+            <div class="mb-3">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control form-control-lg") }}
+            </div>
+            <div class="mb-3">
+                {{ form.password.label(class="form-label")}}
+                {{ form.password(class="form-control form-control-lg")}}
+            </div>
+            <div class="mb-4">
+                {{ form.confirm_password.label(class="form-label")}}
+                {{ form.confirm_password(class="form-control form-control-lg")}}
+            </div>
+            <div class="mb-4">
+                {{ form.submit(class="btn btn-outline-custom")}}
+            </div>
+        </fieldset>
     </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already Have An Account? <a class="ml-2" href="{{ url_for("auth.login") }}">Sing In</a>
+        </small>
+    </div>
 {% endblock %}
