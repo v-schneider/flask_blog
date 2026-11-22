@@ -45,7 +45,7 @@ def register():
                 flash(f"Account created for {form.username.data}!", "success")
                 return redirect(url_for("auth.login"))
 
-        flash(error, "info")
+        flash(error, "danger")
 
     return render_template("auth/register.html", form=form)
 
@@ -71,9 +71,10 @@ def login():
         if error is None:
             session.clear()
             session["user_id"] = user["id"]  # type: ignore
+            flash("You have been loggen in!", "success")
             return redirect(url_for("index"))
 
-        flash(error)
+        flash(error, "danger")
 
     return render_template("auth/login.html", form=form)
 
