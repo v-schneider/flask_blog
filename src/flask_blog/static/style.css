@@ -7,7 +7,8 @@
     border-color: #1B263B;
 }
 
-.btn-outline-custom:hover {
+.btn-outline-custom:hover,
+.btn-outline-custom:focus {
     color: #fff;
     background-color: #1B263B;
     border-color: #1B263B;
