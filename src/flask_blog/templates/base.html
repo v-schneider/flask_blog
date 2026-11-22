@@ -6,8 +6,9 @@
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
             {% block styles %}
-                {% from 'bootstrap5/utils.html' import render_static %}
                 {{ bootstrap.load_css() }}
+                
+                {% from 'bootstrap5/utils.html' import render_static %}
                 {{ render_static('css', 'style.css') }}
             {% endblock %}
 
@@ -42,8 +43,8 @@
             <header>
                 {% block header %}{% endblock %}
             </header>
-            {% for message in get_flashed_messages() %}
-                <div class="flash">{{ message }}</div>
+            {% for category, message in get_flashed_messages(with_categories=true) %}
+                <div class="alert alert-{{ category }} my-4">{{ message }}</div>
             {% endfor %}
             {% block content %}{% endblock %}
         </section>
